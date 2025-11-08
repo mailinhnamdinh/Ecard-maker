@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<head>
+	<title>MAI LINH CARD</title>
+	<link rel="icon" href="../icon.ico" type="image/x-icon" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<style>
+
+    a:active {color: yellow;}
+    a{text-decoration: none;}
+    .Button:active
+    {
+        position:relative;top:2px;
+    }
+    
+    .ChuTrang {color: white;}
+    
+    .Container 
+    {
+        border-radius:5px;
+        padding: 0px;  
+    }
+    
+    @media only screen and (max-width: 700px){.Container {width: 100%;}}
+    @media only screen and (min-width: 701px){.Container {width: 400px;border:1px solid rgba(0,0,0,0.2);}}
+    
+    .DivError {color: red;font-size: 22px;}
+    
+    @font-face {
+    font-family: 'oswald';
+    src: url('../m/themes/fonts/oswald/Oswald-VariableFont_wght.ttf');
+    }
+    
+    @font-face {
+    font-family: 'kanit';
+    src: url('../m/themes/fonts/kanit/Kanit-SemiBold.ttf');
+    }
+    
+    .HeaderFooter {}
+    @media only screen and (max-width: 576px){.HeaderFooter {width: 100vw;}}
+    @media only screen and (min-width: 577px){.HeaderFooter {width: 400px;border:1px solid rgba(0,0,0,0.2);}}
+    
+    .InputBox {width: 100%;font-family: Time New Roman;border-radius:5px;padding:5px;}
+    .InputBoxNho {width: 100%;height: 25px;font-size: 10px;font-family: Time New Roman;border-radius:5px;background:#eeeeee;}
+    
+    .MauNenChung {background: #00a859;}
+    
+    .Radius10 { border-radius:10px 10px 10px 10px;}
+    .Radius5 { border-radius:5px 5px 5px 5px;}
+    
+    .Shadow {box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);}	
+    
+</style>
+	
+</head>
+<body>
+    <?php
+        if (!isset($_GET['page'])){$Page=1;} else {$Page = (int)$_GET['page'];}
+        $PageBack = $Page - 1;
+        $PageNext = $Page + 1;
+        $MaxPage = 2;
+    ?>
+    <center>
+        
+    <div class="HeaderFooter" style="position:fixed;top:0px;left:0px;background:green;height:60px;border-radius:0px 0px 5px 5px;z-index:10;width:100%;">
+        <center>
+        <table class="ChuTrang" style="width:100%;">
+			<tr>
+			    <td style="height:60px;">
+			        <center>
+			            <font color="white">
+			            TAXI MAI LINH - Khách hàng là tất cả!
+			            </font>
+			            <BR>
+			            <b>TỔNG ĐÀI TOÀN QUỐC: <a href="tel:1055"><font color="white">1055</font></a></b>
+			        </center>
+		        </td>
+	        </tr>
+        </table>
+        </center>
+    </div>
+    
+	<div class="Container">
+		<center>
+		    
+		    <div style="height:70px;">.</div>
+		    <?php if ($Page ==1) { ?>
+		    <span style="color:green;font-weight:bold;">HÃY CHỌN MẪU ẢNH BẠN MUỐN<br>ĐỂ BẮT ĐẦU</span> <?php } ?>
+		    <div style="height:20px;">&nbsp;</div>
+		    
+		    <?php 
+		        $GhiChu_Array = array();
+		        for ($i=0;$i<$MaxPage *5;$i++)
+		        {
+		            if ($i==0 || $i==8) {array_push($GhiChu_Array,'Avatar Zalo/Facebook');}
+		            else
+		            {
+		                array_push($GhiChu_Array,'Card visitor');
+		            }
+		        }
+		        
+		        
+		        for ($i=($Page-1)*5 + 1;$i<= ($Page-1)*5 + 5;$i++)
+		        {
+		            if ($i<10){
+    		            echo '<br><div style="height:45px;color:white;">.</div><div style="width:400px;color:green;text-align:left;">Mẫu '.$i.'-'.$GhiChu_Array[$i-1].'</div>';
+    		            echo '<a href="'.$i.'/index.php"><img src="'.$i.'/card_thumb.jpg?version=8" style="width:98%;border:solid rgba(0,0,0,0.6) 0.5px;"></a>';
+		            }
+		        }
+		       ?>
+		    
+		    
+		    
+		    <div style="height:100px;">.</div>
+             
+		</center>
+	</div>
+	
+	<div style="position:fixed;bottom:0px;left:0px;width:100%"><center>
+    	<div class="HeaderFooter" style="background:green;border-radius:0px 0px 5px 5px;z-index:10;width:100%;">
+    	    <center>
+    		<table style="width:95%;color:white;">
+                <tr>
+                    <td style="width:33%;">
+                        <?php 
+                        if ($PageBack>=1)
+                        {
+                            echo '<a href="index.php?page='.$PageBack.'">';
+                        } ?>
+                        <svg width="20" height="35" viewbox="0 0 20 35" <?php if ($Page<2){ echo 'style="opacity:0.3;"';} ?>>
+                          <path fill="white" stroke="black" stroke-width="1" d="M2,14 L19,28 L19,1z" />
+                        </svg>
+                        <?php 
+                        if ($PageBack>=1)
+                        {
+                            echo '</a>';
+                        } ?>
+                    </td>
+                    <td style="width:33%;">
+                        <center>
+                            TRANG <?php echo $Page; ?>
+                        </center>
+                    </td>
+                    
+                    <td style="width:33%;text-align:right;">
+                        <?php 
+                        if ($PageNext<=$MaxPage)
+                        {
+                            echo '<a href="index.php?page='.$PageNext.'">';
+                        } ?>
+    	                    <svg width="20" height="35" viewbox="0 0 20 35" <?php if ($PageNext>$MaxPage){ echo 'style="opacity:0.3;"';} ?>>
+                              <path fill="white" stroke="black" stroke-width="1" d="M19,14 L1,28 L1,1z" />
+                            </svg>
+                        <?php
+                        if ($PageNext<=$MaxPage)
+                        {
+                            echo '</a>';
+                        } ?>
+                    </td>
+                </tr>
+            </table>
+    		</center>
+    		        
+            <div style="text-align:justify;padding-top:10px;padding-bottom:10px;color:green;background:white;width:100%">
+                <center>
+                    <?php if ($Page==1){ ?>
+                    <img src="https://counter4.optistats.ovh/private/freecounterstat.php?c=qpz4sfcqtkgc2r3t1l63dmhw38b9b2bz" border="0" title="web counter" alt="web counter" style="height:12px;">
+                    <?php } ?>
+                    &nbsp;&nbsp;&nbsp; &copy;PVC 2022
+                </center>
+            </div>
+        </div>   
+	</div>
+		
+	<div style="height:50px;">.</div>
+	</center>
+</body>

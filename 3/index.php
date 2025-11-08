@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<head>
+	<title>TAXI MAI LINH</title>
+	<link rel="icon" href="../icon.ico" type="image/x-icon" />
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>-->
+<style>
+   
+    a:active {color: yellow;}
+    a{text-decoration: none;}
+    .Button:active
+    {
+        position:relative;top:2px;
+    }
+    
+    .ButtonOk 
+    {
+    		background:#009933;
+    		color:white;
+    		box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.35);
+    		border-radius: 5px;
+    		padding:10px;
+    }
+    
+    .ButtonCancel 
+    {
+    		background:orange;
+    		box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.35);
+    		border-radius: 5px;
+    		padding:10px;
+    }
+    
+    .ChiTietCaption {padding-top: 10px;color: #028346; font-weight: bold; font-size:20px;}
+    
+    .ChuTrang {color: white;}
+    
+    .Container 
+    {
+        border-radius:5px;
+        padding: 0px;
+        position:relative;
+        min-height:100vh;    
+    }
+    
+    @media only screen and (max-width: 600px){.Container {width: 100%;}}
+    @media only screen and (min-width: 601px){.Container {width: 400px;border:1px solid rgba(0,0,0,0.2);}}
+    
+    .DaChinhSua {background:orange;color:white;}
+    
+    .DivData 
+    {
+        overflow: scroll;
+        height:90vh;
+        padding:0px;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    .DivData::-webkit-scrollbar {
+      display: none;
+    }
+    
+    
+    .DivBottom
+    {
+    	position:fixed;
+    	bottom:160px;
+    	overflow: hide;
+    	width: 50px;;		
+    	text-align: left;
+    	color: #eeeeee;
+    	padding-top:5px;
+    	padding-bottom:2px;
+    	text-decoration: bold;
+    	border-top-left-radius: 10px;
+    	border-top-right-radius: 10px;
+    	font: 20px Arial, Helvetica, sans-serif;
+    	display:none;
+    	opacity:0.8;
+    	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    }
+    
+    .DivBottom_Show
+    {
+    	position:fixed;
+    	bottom:106px;
+    	overflow: hide;
+    	width: 50px;
+    	text-align: center;
+    	color: #eeeeee;
+    	padding:0px 0px 0px 0px;
+    	text-decoration: bold;
+    	border-bottom-left-radius: 10px;
+    	border-bottom-right-radius: 10px;
+    	font: 20px Arial, Helvetica, sans-serif;
+    	opacity:0.7;
+    	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    }
+    
+    
+    
+    .DivError {color: red;font-size: 22px;}
+    
+    
+    
+    .edit
+    {
+    	width: 100%;
+    }
+    
+    .editMode
+    {
+    	border: 1px solid black;
+    }
+    
+  
+    @font-face {
+    font-family: 'oswald';
+    src: url('../m/themes/fonts/oswald/Oswald-VariableFont_wght.ttf');
+    }
+    
+    @font-face {
+    font-family: 'kanit';
+    src: url('../m/themes/fonts/kanit/Kanit-SemiBold.ttf');
+    }
+    
+    .GiayChungNhan_Div
+    {
+        background:#f2f2f2;
+        position:absolute;
+        top:0px;
+        min-height:100%;
+        z-index:2;
+        padding-top:100px;
+        padding-bottom:10px;
+    }
+    @media only screen and (max-width: 600px){.GiayChungNhan_Div {width: 100%;padding: 0px 0px;}}
+    @media only screen and (min-width: 601px){.GiayChungNhan_Div {width: 400px;padding: 0px 0px;border:1px solid rgba(0,0,0,0.2);}}
+    
+    
+    .InputBox {width: 100%;font-family: Time New Roman;border-radius:5px;padding:5px;}
+    .InputBoxNho {width: 100%;height: 25px;font-size: 10px;font-family: Time New Roman;border-radius:5px;background:#eeeeee;}
+    
+    
+    
+    .KhachHang_ThemMoi 
+    {
+        background:white;
+        display:none;
+        z-index:101;
+        top:60px;
+        left:0px;
+        padding:0px;
+        border:1px solid rgba(0,0,0,0.1);
+        border-radius:5px;
+    }
+    @media only screen and (max-width: 600px){.KhachHang_ThemMoi {width: 100%;position:fixed;}}
+    @media only screen and (min-width: 601px){.KhachHang_ThemMoi {width: 400px;position:absolute;}}
+    
+    .KhachHang_ThemMoi_InputBox
+    {
+        padding:5px;
+        border-radius:5px;
+        width:90%;
+        margin-top:5px;
+        border:1px solid rgba(0,0,0,0.1);
+    }
+    .KhachHang_TungNguoi_Div
+    {
+        background:white;
+        z-index:101;
+        padding:0px;
+        border:1px solid rgba(0,0,0,0.1);
+        border-radius:5px;
+        padding-top:10px;
+        padding-bottom:10px;
+        margin-top:5px;
+    }
+    @media only screen and (min-width: 601px){.KhachHang_TungNguoi_Div {width:400px;}}
+    @media only screen and (max-width: 600px){.KhachHang_TungNguoi_Div {width:100%;}}
+    
+    .Login_Form
+    {
+        background:white;
+        border:1px solid rgba(0,0,0,0.1);
+        border-radius:5px;
+        padding:0px 8px 0px 8px;
+    }
+    @media only screen and (max-width: 600px){.Login_Form {width: 100%;padding: 0px 0px;}}
+    @media only screen and (min-width: 601px){.Login_Form {margin-top:100px;width: 400px;padding: 0px 0px;border:1px solid rgba(0,0,0,0.2);}}
+    
+    
+    .MauNenBody {}
+    .MauNenChung {background: #00a859;}
+    .MauNenDataChung {background: #eeeeee;}
+    .MauChuChungNenTrang {color: #00a859;}
+    .MauChuChungNenMau {color: white;}
+    
+    .Menu_Header_Div
+    {
+        
+        bottom:2px;
+        left:0px;
+        padding:0px;
+        text-align:left;
+        z-index:99;
+    }
+    @media only screen and (max-width: 600px){.Menu_Header_Div {width: 100%;position:fixed;}}
+    @media only screen and (min-width: 601px){.Menu_Header_Div {width: 400px;position:absolute;}}
+    
+    .Menu_Left_Table
+    {
+      font-family: "Times New Roman", Times, serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    .Menu_Left_Table td, .Menu_Left_Table th 
+    {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    .Menu_Left_Table tr {color:rgba(255, 255, 255,1);background-color:rgba(255, 255, 255,0.1);}
+    .Menu_Left_Table tr:nth-child(even){}
+    .Menu_Left_Table tr:hover {background-color: green;color:yellow;}
+    
+    .Radius10 { border-radius:10px 10px 10px 10px;}
+    .Radius5 { border-radius:5px 5px 5px 5px;}
+    
+    .SelectBox {width: 100%;font-family: Time New Roman;border-radius:5px;padding:5px;border:2px rgba(0,0,0,0.7) solid;}
+    .SelectRow {background-color: yellow;}
+    
+    .Shadow {box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);}	
+    .TableData 
+    {
+      font-family: "Times New Roman", Times, serif;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    
+    .TableData td, .TableData th 
+    {
+      border: 1px solid #ddd;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+    .TableData tr:nth-child(even){background-color: #f2f2f2;}
+    .TableData tr:hover {background-color: #ddd;color:black;}
+    .TableData th {background-color:#00a859;color:white;text-align:center;}
+    
+    
+    
+    .TdInputCaption {padding-top: 10px;color: #028346; font-weight: bold; font-size:15px;}
+    .TDLeft {max-width:15%;vertical-align:top;text-align:left;padding:0px;}
+    .ThemDoiTuongBaoHiemMoi_Div
+    {
+        background:white;
+        position:absolute;
+        top:0px;
+        min-height:100%;
+        z-index:2;
+        padding-top:100px;
+        padding-bottom:10px;
+    }
+    @media only screen and (max-width: 600px){.ThemDoiTuongBaoHiemMoi_Div {width: 100%;padding: 0px 0px;}}
+    @media only screen and (min-width: 601px){.ThemDoiTuongBaoHiemMoi_Div{width: 400px;padding: 0px 0px;border:1px solid rgba(0,0,0,0.2);}}
+    
+    
+    .THKetQuaSearch {width:120px;color:rgba(255, 255, 255,1);background-color:rgba(255, 255, 255,0.1);border-radius:5px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12px;
+    text-align:right;
+    }
+    
+    
+    
+    
+    .TrHeader {text-align:center;}
+    .TrChan{}
+    .TrLe {}
+    .TdChan {border: 1px solid #f2f2f2;padding: 2px 2px 2px 2px; min-height: 25px;}	
+    .TdLe {border: 1px solid #f2f2f2;padding: 2px 2px 2px 2px; min-height: 25px;}
+    .TextAreaInput {width: 100%;font-size: 20px;font-family: Time New Roman;border-radius:8px;}
+    
+</style>
+	
+</head>
+<body>
+    <div id="DivChe" style="background:rgba(0,0,0,0.2);position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:100;display:none;"></div>
+    <center>
+	<div class="Container">
+		<center>
+		    <div id="GiayChungNhan_Div" class="GiayChungNhan_Div" style="">
+    		    <center>
+    		    <div style="height:10px;">&nbsp;</div>
+    		    <canvas id="GiayChungNhan_Img" width="900" height="554" style="display:none;">
+                    
+                </canvas>
+                <canvas id="GiayChungNhan_Img2" width="300" height="184" style="">
+                    
+                </canvas>
+                <style>
+                    .Download_Button:active
+                    {
+                        background:green;
+                        color:white;
+                    }
+                </style>
+                <br>
+                <input type="text" id="HoVaTen" class="InputBox" style="width:80%;margin-top:8px;" placeholder="Nhập họ tên của bạn tại đây" onkeyup="ShowChiTietDoiTuong_ChungNhanBaoHiem('GiayChungNhan_Img',900,554);ShowChiTietDoiTuong_ChungNhanBaoHiem('GiayChungNhan_Img2',300,184);">
+                <input type="text" id="SoDienThoai" class="InputBox" style="width:80%;margin-top:8px;" placeholder="Số điện thoại" onkeyup="ShowChiTietDoiTuong_ChungNhanBaoHiem('GiayChungNhan_Img',900,554);ShowChiTietDoiTuong_ChungNhanBaoHiem('GiayChungNhan_Img2',300,184);">
+                <a id="download" download="CARD TAXI.png">
+                    <button type="button" onclick="download()" class="Download_Button" style="border:green 1px solid;padding:8px;color:green;border-radius:5px;margin-top:8px;">Tải ảnh về máy</button>
+                </a>
+                <script>
+                    function download() 
+                    {
+                        //alert(TenAnh);
+                        var download = document.getElementById("download");
+                        var image = document.getElementById("GiayChungNhan_Img").toDataURL("image/jpeg")
+                            .replace("image/png", "image/octet-stream");
+                        download.setAttribute("href", image);
+                        download.setAttribute("download","CARD TAXI.jpg");
+                    }
+                    
+                </script>
+                <div style="height:60px;">&nbsp;</div>
+    		</div>	
+    		
+            <div id="Menu_Header_Div" class="Menu_Header_Div" style="">
+				<table class="DivHeader ChuTrang MauNenChung" style="width:100%;">
+					<tr>
+					    <td style="height:50px;">
+					        <a href="../index.php"><img src="../themes/img/back.svg" style="width:40px;"></a>
+				        </td>
+			        </tr>
+	            </table>        
+            </div>
+            
+            
+            
+            <script>
+                function ShowChiTietDoiTuong_ChungNhanBaoHiem(Canva_ID,Rong0,Cao0)		
+                {                
+    			    var c = document.getElementById(Canva_ID);
+                    var ctx = c.getContext("2d");
+                    ctx.clearRect(0, 0, c.width, c.height);
+                    
+                    var TyLe =1;
+                    var LeTrai = 110*TyLe;
+                    var LeTren = 60*TyLe;
+                    var Rong = Rong0*TyLe;
+                    var Cao = Cao0*TyLe;
+                    
+                    var Vien = 5*TyLe;
+                    var KhoangCachGiua = 50*TyLe;
+                    
+                    ctx.fillStyle = "red";
+                    //ctx.font = "30px Times New Roman";
+                    ctx.font="bold " + parseInt(Rong0*14/300)*TyLe + "px Times New Roman";
+                    ctx.textAlign = "right";
+                    
+                    
+                    var base_image = new Image();
+                    base_image.setAttribute('crossOrigin', 'anonymous');
+                    base_image.onload = function()
+                    {
+                        
+                        /*
+                        const txtSize = measureText({font: "arial", text: "BB"});
+                        ctx.font = txtSize.font;
+                        const width = ctx.measureText("BabcdefghB").width;
+                        const actualWidth = width - txtSize.left - txtSize.rightOffset;
+                        const scale = canvas.width / actualWidth;
+                        ctx.setTransform(scale, 0, 0, scale,  -txtSize.left * scale, 0);
+                        ctx.fillText("BabcdefghB",0,0);
+                        */
+                        
+                        
+                        
+                        ctx.drawImage(base_image, 0, 0,Rong,Cao);
+                        var X1= Rong - Rong0*10/300*TyLe;
+                        var Y1= Cao * 0.2;
+                        /*
+                        ctx.fillStyle = "black";
+                        ctx.fillText($('#HoVaTen').val().toUpperCase(), X1+1, Y1+1);
+                        ctx.fillStyle = "red"; */
+                        ctx.fillText($('#HoVaTen').val().toUpperCase(), X1, Y1);
+                        
+                        ctx.font="bold " + parseInt(Rong0*14/300 - Rong0/100)*TyLe + "px Times New Roman";
+                        /*
+                        ctx.fillStyle = "black";
+                        ctx.fillText($('#SoDienThoai').val(), X1 - Rong0/20 + Rong0/900, Y1 + Rong0*15/300*TyLe+Rong0/900);
+                        ctx.fillStyle = "red";
+                        */
+                        ctx.fillText($('#SoDienThoai').val(), X1 - Rong0/20, Y1 + Rong0*15/300*TyLe);
+                        
+                        
+                        
+                    }
+                    base_image.src = 'card.jpg?vesion=3';
+                    
+                    
+                        
+                }
+                ShowChiTietDoiTuong_ChungNhanBaoHiem('GiayChungNhan_Img',900,554);
+                ShowChiTietDoiTuong_ChungNhanBaoHiem('GiayChungNhan_Img2',300,184.6667);
+            </script>       	    
+		</center>
+	</div>
+	
+	
+			
+							<div style="height:40px;">.</div>
+				<div style="text-align:justify;padding:10px;color:black;display:none;"><center>&nbsp;&nbsp;&nbsp;&nbsp;&copy; Copyright - PVC 2022</center></div>
+		</center>
+</body>
