@@ -85,33 +85,35 @@
 		<center>
 		    
 		    <div style="height:70px;">.</div>
-		    <?php if ($Page ==1) { ?>
-		    <span style="color:green;font-weight:bold;">HÃY CHỌN MẪU ẢNH BẠN MUỐN<br>ĐỂ BẮT ĐẦU</span> <?php } ?>
+		    <span style="color:green;font-weight:bold;">HÃY CHỌN MẪU ẢNH BẠN MUỐN<br>ĐỂ BẮT ĐẦU</span>
 		    <div style="height:20px;">&nbsp;</div>
-		    
-		    <?php 
-		        $GhiChu_Array = array();
-		        for ($i=0;$i<$MaxPage *5;$i++)
+		    <script>
+                const maxPage = 2;
+                const page =1;
+                var ghiChu_array = [];
+                ghiChu_array[0] = 'Avatar Zalo/Facebook';
+                ghiChu_array[8] = 'Avatar Zalo/Facebook';
+                for (var i=1;i< maxPage * 5;i++)
+                {
+                    if (i!=8)
+                    {
+                        ghiChu_array[i] = 'Card visitor';
+                    }
+                }
+                
+                for (let i=(page-1)*5 + 1;i<= (page-1)*5 + 5;i++)
 		        {
-		            if ($i==0 || $i==8) {array_push($GhiChu_Array,'Avatar Zalo/Facebook');}
-		            else
-		            {
-		                array_push($GhiChu_Array,'Card visitor');
+		            if (i<10)
+                    {
+    		            document.write(`<br>
+                            <div style="height:45px;color:white;">.</div>
+                            <div style="width:400px;color:green;text-align:left;">Mẫu ${i}-${ghiChu_array[i-1]}</div>
+    		                <a href="${i}/index.php">
+                                    <img src="${i}/card_thumb.jpg?version=8" style="width:98%;border:solid rgba(0,0,0,0.6) 0.5px;">
+                            </a>`;
 		            }
 		        }
-		        
-		        
-		        for ($i=($Page-1)*5 + 1;$i<= ($Page-1)*5 + 5;$i++)
-		        {
-		            if ($i<10){
-    		            echo '<br><div style="height:45px;color:white;">.</div><div style="width:400px;color:green;text-align:left;">Mẫu '.$i.'-'.$GhiChu_Array[$i-1].'</div>';
-    		            echo '<a href="'.$i.'/index.php"><img src="'.$i.'/card_thumb.jpg?version=8" style="width:98%;border:solid rgba(0,0,0,0.6) 0.5px;"></a>';
-		            }
-		        }
-		       ?>
-		    
-		    
-		    
+            </script>
 		    <div style="height:100px;">.</div>
              
 		</center>
@@ -123,40 +125,24 @@
     		<table style="width:95%;color:white;">
                 <tr>
                     <td style="width:33%;">
-                        <?php 
-                        if ($PageBack>=1)
-                        {
-                            echo '<a href="index.php?page='.$PageBack.'">';
-                        } ?>
-                        <svg width="20" height="35" viewbox="0 0 20 35" <?php if ($Page<2){ echo 'style="opacity:0.3;"';} ?>>
-                          <path fill="white" stroke="black" stroke-width="1" d="M2,14 L19,28 L19,1z" />
-                        </svg>
-                        <?php 
-                        if ($PageBack>=1)
-                        {
-                            echo '</a>';
-                        } ?>
+                        <a href="index2.php">                        
+                            <svg width="20" height="35" viewbox="0 0 20 35" style="opacity:0.3;">
+                            <path fill="white" stroke="black" stroke-width="1" d="M2,14 L19,28 L19,1z" />
+                            </svg>
+                        </a>
                     </td>
                     <td style="width:33%;">
                         <center>
-                            TRANG <?php echo $Page; ?>
+                            TRANG 1
                         </center>
                     </td>
                     
                     <td style="width:33%;text-align:right;">
-                        <?php 
-                        if ($PageNext<=$MaxPage)
-                        {
-                            echo '<a href="index.php?page='.$PageNext.'">';
-                        } ?>
+                        <a href="index.php?page='.$PageNext.'">
     	                    <svg width="20" height="35" viewbox="0 0 20 35" <?php if ($PageNext>$MaxPage){ echo 'style="opacity:0.3;"';} ?>>
                               <path fill="white" stroke="black" stroke-width="1" d="M19,14 L1,28 L1,1z" />
                             </svg>
-                        <?php
-                        if ($PageNext<=$MaxPage)
-                        {
-                            echo '</a>';
-                        } ?>
+                        </a>
                     </td>
                 </tr>
             </table>
